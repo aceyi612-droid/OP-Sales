@@ -68,7 +68,7 @@ button {
   display: none !important;
 }
 
-/* 3. HEADER: title | page tabs | Save / New.
+/* 3. HEADER: title on the left; page tabs and Save / New on the right, all spaced the same.
    The tab text shrinks with the window. When the whole tab row no longer fits beside the title, it moves
    down to its own row as one line (tabs never stack), and Save / New always come after it. */
 .bar {
@@ -78,21 +78,26 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem clamp(0.5rem, 2vw, 1rem);
-  padding: 0.5rem max(1rem, env(safe-area-inset-right)) 0.5rem
-    max(1rem, env(safe-area-inset-left));
+  justify-content: flex-end; /* tabs and buttons sit on the right, also when they wrap to a new row */
+  gap: 0.5rem var(--tab-gap);
+  /* Side padding lines the header up with the page content below (same 70rem width as <main>) */
+  padding-block: 0.5rem;
+  padding-inline: max(1rem, env(safe-area-inset-left), calc((100% - 70rem) / 2))
+    max(1rem, env(safe-area-inset-right), calc((100% - 70rem) / 2));
   background: var(--card);
   border-block-end: 1px solid var(--border);
+
   /* One size for the tabs AND the Save / New buttons, so they always match */
   --tab-size: clamp(0.7rem, 0.45rem + 1.1vw, 1rem);
   --tab-pad: 0.4rem clamp(0.4rem, 1.3vw, 0.8rem);
+  --tab-gap: clamp(0.25rem, 0.8vw, 0.4rem); /* space between every tab and button */
 
   h1 {
     display: flex;
     flex: none;
     align-items: center;
     gap: 0.6rem;
-    margin: 0;
+    margin: 0 auto 0 0; /* pushes everything else to the right */
     font-size: 1.1rem;
   }
 
@@ -101,6 +106,58 @@ button {
     block-size: 2rem;
     inline-size: auto;
   }
+
+  /* Tabs: keep their full width (flex-shrink 0) so the bar wraps instead of squashing them;
+     max-inline-size lets the row scroll sideways on the very smallest screens */
+  nav {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    gap: var(--tab-gap);
+    max-inline-size: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--tab-gap);
+  }
+
+  output {
+    color: var(--muted);
+    font-size: 0.8rem;
+
+    &:empty {
+      display: none; /* an empty status would add an extra gap after New */
+    }
+  }
+}
+
+/* Page links AND header buttons share one size, so they always match */
+.bar nav a,
+.bar .actions button {
+  flex: none;
+  padding: var(--tab-pad);
+  font-size: var(--tab-size);
+  white-space: nowrap;
+}
+
+/* Page links (buttons already get their border and colors from the button rule near the top) */
+.bar nav a {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+
+  &[aria-current='page'] {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+}
 
   /* Tabs: keep their full width (flex-shrink 0) so the bar wraps instead of squashing them;
      max-inline-size lets the row scroll sideways on the very smallest screens */
@@ -147,6 +204,7 @@ button {
     background: var(--accent);
     color: #fff;
   }
+  
 }
 
 /* 4. LAYOUT: the page fills the window up to 70rem wide (raise or remove max for wider) */
