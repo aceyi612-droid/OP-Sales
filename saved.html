@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Saved | Facility Walkthrough</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Microsoft sign-in library: only used if you fill in MS settings at the top of script.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.28.0/lib/msal-browser.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header class="bar">
+      <h1><img class="logo" src="images/logo.png" alt="" /> Saved</h1>
+      <nav aria-label="Main">
+        <a href="index.html">Walkthrough</a>
+        <a href="summary.html">Summary &amp; Bid</a>
+        <a href="scope.html">Scope of Work</a>
+        <a href="proposal.html">Proposal</a>
+        <a href="saved.html" aria-current="page">Saved</a>
+      </nav>
+      <div class="actions">
+        <button type="button" id="save" class="primary">Save</button>
+        <button type="button" id="new">New</button>
+        <output id="status" role="status"></output>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Saved walkthroughs</h2>
+        <ul id="saved-list" class="saved"></ul>
+      </section>
+    </main>
+  </body>
+</html>

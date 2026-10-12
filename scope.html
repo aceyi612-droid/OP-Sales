@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Scope of Work | Facility Walkthrough</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="scope.css" />
+    <!-- Microsoft sign-in library: only used if you fill in MS settings at the top of script.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.28.0/lib/msal-browser.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+    <script src="scope.js" defer></script>
+  </head>
+
+  <body>
+    <header class="bar">
+      <h1>
+        <img class="logo" src="images/logo.svg" alt="" width="32" height="32" />
+        Walkthrough &amp; Bid
+      </h1>
+      <nav aria-label="Main">
+        <a href="index.html">Walkthrough</a>
+        <a href="summary.html">Summary &amp; Bid</a>
+        <a href="scope.html" aria-current="page">Scope of Work</a>
+        <a href="proposal.html">Proposal</a>
+        <a href="saved.html">Saved</a>
+      </nav>
+      <div class="actions">
+        <button type="button" id="save" class="primary">Save</button>
+        <button type="button" id="new">New</button>
+        <output id="status" role="status"></output>
+      </div>
+    </header>
+
+    <main>
+      <section class="card no-print">
+        <h2>Industry &amp; rooms</h2>
+        <div class="grid">
+          <label
+            >Industry
+            <select id="sow-industry"></select>
+          </label>
+          <label
+            >Default frequency for new tasks
+            <select id="sow-freq"></select>
+          </label>
+        </div>
+        <p class="hint">
+          <span id="sow-industry-note"></span>
+          <button type="button" id="sow-match" hidden>
+            Use the walkthrough industry
+          </button>
+        </p>
+        <p class="hint">
+          Rooms for this industry, plus any areas listed on the walkthrough.
+          Untick a room to leave it out.
+        </p>
+        <div id="sow-picker" class="sow-picker"></div>
+        <p class="sow-add">
+          <button type="button" id="sow-add-room">+ Add a room</button>
+        </p>
+        <p class="hint" id="sow-msg"></p>
+      </section>
+
+      <div id="sow-editor" class="no-print"></div>
+
+      <section class="card">
+        <h2>Scope of Work</h2>
+        <div id="sow-preview"></div>
+      </section>
+    </main>
+  </body>
+</html>

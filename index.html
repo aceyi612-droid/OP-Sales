@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Walkthrough | Facility Walkthrough</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Microsoft sign-in library: only used if you fill in MS settings at the top of script.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.28.0/lib/msal-browser.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header class="bar">
+      <h1>
+        <img class="logo" src="images/logo.png" alt="" />
+        Walkthrough
+      </h1>
+      <nav aria-label="Main">
+        <a href="index.html" aria-current="page">Walkthrough</a>
+        <a href="summary.html">Summary &amp; Bid</a>
+        <a href="scope.html">Scope of Work</a>
+        <a href="proposal.html">Proposal</a>
+        <a href="saved.html">Saved</a>
+      </nav>
+      <div class="actions">
+        <button type="button" id="save" class="primary">Save</button>
+        <button type="button" id="new">New</button>
+        <output id="status" role="status"></output>
+      </div>
+    </header>
+
+    <main>
+      <form id="wt" autocomplete="off">
+        <section class="card">
+          <h2>Customer &amp; Facility</h2>
+          <div class="grid">
+            <label
+              >Business / facility name
+              <input type="text" name="name" />
+            </label>
+            <label
+              >Contact name / title
+              <input type="text" name="contact" />
+            </label>
+            <label
+              >Phone
+              <input type="tel" name="phone" />
+            </label>
+            <label
+              >Email
+              <input type="email" name="email" />
+            </label>
+            <label
+              >Facility address
+              <input type="text" name="addr" />
+            </label>
+            <label
+              >Date
+              <input type="date" name="dt" />
+            </label>
+            <label
+              >Salesperson
+              <input type="text" name="rep" />
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Current Service</h2>
+          <div class="grid">
+            <label
+              >Use a cleaning service?
+              <select name="cs">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label
+              >Who?
+              <input type="text" name="who" />
+            </label>
+            <label
+              >Did you hire them?
+              <select name="hired">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label
+              >How long?
+              <input type="text" name="since" />
+            </label>
+            <label
+              >Current frequency / days
+              <input type="text" name="cf" />
+            </label>
+            <label
+              >Keys / alarms / access
+              <input type="text" name="keys" />
+            </label>
+            <label
+              ># employees
+              <input
+                type="number"
+                name="emp"
+                inputmode="decimal"
+                min="0"
+                step="any"
+              />
+            </label>
+            <label
+              ># customers/patients per day
+              <input
+                type="number"
+                name="cust"
+                inputmode="decimal"
+                min="0"
+                step="any"
+              />
+            </label>
+            <label class="wide"
+              >About current service
+              <textarea name="csn" rows="2"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Find the Pain</h2>
+          <div class="grid">
+            <label
+              >Any issues with current service?
+              <select name="iss">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label class="wide"
+              >Main thing service could do better
+              <textarea name="better" rows="2"></textarea>
+            </label>
+            <label class="wide"
+              >Priority areas / concerns
+              <textarea name="prio" rows="2"></textarea>
+            </label>
+          </div>
+          <p>Pain → Solution Notes</p>
+          <div class="table-scroll">
+            <table data-rows="ps" data-start="2">
+              <thead>
+                <tr>
+                  <th scope="col">Customer pain point</th>
+                  <th scope="col">What we observed</th>
+                  <th scope="col">Proposed solution / benefit</th>
+                  <th class="no-print"></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="no-print">
+            <button type="button" data-add-row="ps">+ Add row</button>
+          </p>
+          <template data-for="ps"
+            ><tr>
+              <td>
+                <input
+                  type="text"
+                  name="ps-p-{i}"
+                  aria-label="Customer pain point, row {i}"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="ps-o-{i}"
+                  aria-label="What we observed, row {i}"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="ps-s-{i}"
+                  aria-label="Proposed solution / benefit, row {i}"
+                />
+              </td>
+              <td class="no-print">
+                <button
+                  type="button"
+                  data-remove-row
+                  aria-label="Remove this row"
+                >
+                  ✕
+                </button>
+              </td>
+            </tr></template
+          >
+        </section>
+
+        <section class="card">
+          <h2>Buying Process</h2>
+          <div class="grid">
+            <label
+              >Current spend / budget $ per month
+              <input type="text" name="bud" />
+            </label>
+            <label
+              >Decision makers
+              <input type="text" name="dm" />
+            </label>
+            <label
+              >Contract expires
+              <input type="text" name="exp" />
+            </label>
+            <label
+              >Change process / approvals
+              <input type="text" name="proc" />
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Building Overview &amp; Bid Inputs</h2>
+          <div class="grid">
+            <label
+              >Total cleanable sq ft
+              <input
+                type="number"
+                name="sqft"
+                inputmode="decimal"
+                min="0"
+                step="any"
+              />
+            </label>
+            <label
+              >Number of floors
+              <input
+                type="number"
+                name="fl"
+                inputmode="decimal"
+                min="0"
+                step="any"
+              />
+            </label>
+            <label
+              >Cleans per week
+              <input
+                type="number"
+                name="cpw"
+                inputmode="decimal"
+                min="0"
+                step="any"
+              />
+            </label>
+            <label
+              >Preferred cleaning time
+              <input type="text" name="pt" />
+            </label>
+            <label
+              >Requested start date
+              <input type="date" name="sd" />
+            </label>
+            <label
+              >Current condition
+              <select name="cond">
+                <option></option>
+                <option>Excellent</option>
+                <option>Good</option>
+                <option>Fair</option>
+                <option>Poor</option>
+              </select>
+            </label>
+            <label
+              >Initial deep clean
+              <select name="dc">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label
+              >Industry (for production rates)
+              <select name="ind">
+                <option></option>
+                <option>Education</option>
+                <option>Finance, Investment &amp; Legal</option>
+                <option>Government &amp; Utilities</option>
+                <option>Healthcare</option>
+                <option>Logistics, Manufacturing &amp; Industrial</option>
+                <option>Media, Personal &amp; Retail</option>
+                <option>Real Estate &amp; Property Management</option>
+                <option>Religious</option>
+              </select>
+            </label>
+            <label
+              >Density
+              <select name="den">
+                <option></option>
+                <option>Simple</option>
+                <option>Medium</option>
+                <option>Hard</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Access &amp; Scheduling</h2>
+          <div class="grid">
+            <fieldset class="checks wide">
+              <legend>Access</legend>
+              <label
+                ><input type="checkbox" name="acc" value="Keys" /> Keys</label
+              >
+              <label
+                ><input type="checkbox" name="acc" value="Alarm" /> Alarm</label
+              >
+              <label
+                ><input type="checkbox" name="acc" value="Badge" /> Badge</label
+              >
+              <label
+                ><input type="checkbox" name="acc" value="Escort" />
+                Escort</label
+              >
+              <label
+                ><input type="checkbox" name="acc" value="Other" /> Other</label
+              >
+            </fieldset>
+            <label class="wide"
+              >Access / security details
+              <textarea name="accd" rows="2"></textarea>
+            </label>
+            <fieldset class="checks wide">
+              <legend>Cleaning days</legend>
+              <label
+                ><input type="checkbox" name="days" value="Sun" /> Sun</label
+              >
+              <label
+                ><input type="checkbox" name="days" value="Mon" /> Mon</label
+              >
+              <label
+                ><input type="checkbox" name="days" value="Tue" /> Tue</label
+              >
+              <label
+                ><input type="checkbox" name="days" value="Wed" /> Wed</label
+              >
+              <label
+                ><input type="checkbox" name="days" value="Thu" /> Thu</label
+              >
+              <label
+                ><input type="checkbox" name="days" value="Fri" /> Fri</label
+              >
+              <label
+                ><input type="checkbox" name="days" value="Sat" /> Sat</label
+              >
+            </fieldset>
+            <label class="wide"
+              >Special scheduling / compliance requirements
+              <textarea name="spec" rows="2"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Janitor Closet &amp; Storage</h2>
+          <div class="grid">
+            <label
+              >Closet location
+              <input type="text" name="jl" />
+            </label>
+            <label
+              >Storage
+              <select name="stor">
+                <option></option>
+                <option>Good</option>
+                <option>Adequate</option>
+                <option>Poor</option>
+              </select>
+            </label>
+            <label
+              >Sink / water
+              <select name="sink">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label
+              >Mop sink
+              <select name="mop">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label
+              >Electrical outlet
+              <select name="outl">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label
+              >Consumables
+              <select name="cons">
+                <option></option>
+                <option>Customer</option>
+                <option>Office Pride</option>
+              </select>
+            </label>
+            <label
+              >Dumpster location
+              <input type="text" name="dump" />
+            </label>
+            <label
+              >Special request
+              <input type="text" name="jr" />
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Building Details — Walk the Facility</h2>
+          <div class="table-scroll">
+            <table data-rows="area" data-start="3">
+              <thead>
+                <tr>
+                  <th scope="col">Area / room</th>
+                  <th scope="col">Sq ft</th>
+                  <th scope="col">Floor type</th>
+                  <th scope="col">Frequency</th>
+                  <th scope="col">Notes</th>
+                  <th class="no-print"></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="no-print">
+            <button type="button" data-add-row="area">+ Add row</button>
+          </p>
+          <template data-for="area"
+            ><tr>
+              <td>
+                <input
+                  type="text"
+                  name="area-n-{i}"
+                  aria-label="Area / room, row {i}"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="area-sf-{i}"
+                  aria-label="Sq ft, row {i}"
+                  inputmode="decimal"
+                  min="0"
+                  step="any"
+                />
+              </td>
+              <td>
+                <select name="area-ft-{i}" aria-label="Floor type, row {i}">
+                  <option></option>
+                  <option>Carpet</option>
+                  <option>VCT</option>
+                  <option>LVT</option>
+                  <option>Tile/Ceramic</option>
+                  <option>Concrete</option>
+                  <option>Wood</option>
+                  <option>Other hard</option>
+                </select>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="area-fr-{i}"
+                  aria-label="Frequency, row {i}"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="area-nt-{i}"
+                  aria-label="Notes, row {i}"
+                />
+              </td>
+              <td class="no-print">
+                <button
+                  type="button"
+                  data-remove-row
+                  aria-label="Remove this row"
+                >
+                  ✕
+                </button>
+              </td>
+            </tr></template
+          >
+        </section>
+
+        <section class="card">
+          <h2>11. Restroom Fixture Count</h2>
+          <div class="table-scroll">
+            <table data-rows="rr" data-start="2">
+              <thead>
+                <tr>
+                  <th scope="col">Restroom</th>
+                  <th scope="col">Toilets</th>
+                  <th scope="col">Urinals</th>
+                  <th scope="col">Sinks</th>
+                  <th scope="col">Showers</th>
+                  <th class="no-print"></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="no-print">
+            <button type="button" data-add-row="rr">+ Add row</button>
+          </p>
+          <template data-for="rr"
+            ><tr>
+              <td>
+                <input
+                  type="text"
+                  name="rr-n-{i}"
+                  aria-label="Restroom, row {i}"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="rr-t-{i}"
+                  aria-label="Toilets, row {i}"
+                  inputmode="decimal"
+                  min="0"
+                  step="any"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="rr-u-{i}"
+                  aria-label="Urinals, row {i}"
+                  inputmode="decimal"
+                  min="0"
+                  step="any"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="rr-s-{i}"
+                  aria-label="Sinks, row {i}"
+                  inputmode="decimal"
+                  min="0"
+                  step="any"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="rr-sh-{i}"
+                  aria-label="Showers, row {i}"
+                  inputmode="decimal"
+                  min="0"
+                  step="any"
+                />
+              </td>
+              <td class="no-print">
+                <button
+                  type="button"
+                  data-remove-row
+                  aria-label="Remove this row"
+                >
+                  ✕
+                </button>
+              </td>
+            </tr></template
+          >
+        </section>
+
+        <section class="card">
+          <h2>Additional Service Opportunities</h2>
+          <div class="grid">
+            <fieldset class="checks wide">
+              <legend>Opportunities</legend>
+              <label
+                ><input type="checkbox" name="add" value="Carpet" />
+                Carpet</label
+              >
+              <label
+                ><input type="checkbox" name="add" value="Strip/Wax" />
+                Strip/Wax</label
+              >
+              <label
+                ><input type="checkbox" name="add" value="Scrub/Recoat" />
+                Scrub/Recoat</label
+              >
+              <label
+                ><input type="checkbox" name="add" value="Window" />
+                Window</label
+              >
+              <label
+                ><input type="checkbox" name="add" value="Pressure Washing" />
+                Pressure Washing</label
+              >
+              <label
+                ><input type="checkbox" name="add" value="High Dusting" /> High
+                Dusting</label
+              >
+              <label
+                ><input type="checkbox" name="add" value="Other" /> Other</label
+              >
+            </fieldset>
+            <label class="wide"
+              >Notes
+              <textarea name="addn" rows="2"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Proposal &amp; Follow-up</h2>
+          <div class="grid">
+            <label
+              >Proposal date
+              <input type="date" name="pd" />
+            </label>
+            <label
+              >Type
+              <select name="pty">
+                <option></option>
+                <option>In-Person</option>
+                <option>Virtual Live</option>
+                <option>Email</option>
+              </select>
+            </label>
+            <label
+              >Who should be present?
+              <input type="text" name="pw" />
+            </label>
+            <label
+              >#1 buying criterion
+              <input type="text" name="b1" />
+            </label>
+            <label
+              >#2 buying criterion
+              <input type="text" name="b2" />
+            </label>
+            <label
+              >#3 buying criterion
+              <input type="text" name="b3" />
+            </label>
+            <label
+              >Expected decision date
+              <input type="date" name="dd" />
+            </label>
+            <label
+              >Expected start date
+              <input type="date" name="st" />
+            </label>
+            <label class="wide"
+              >Final notes / commitments
+              <textarea name="fin" rows="2"></textarea>
+            </label>
+          </div>
+        </section>
+      </form>
+    </main>
+  </body>
+</html>

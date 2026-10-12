@@ -1,0 +1,124 @@
+/* Scope of Work page. Loaded after styles.css, so it reuses its colors. */
+
+/* Room checkboxes at the top: as many columns as fit */
+.sow-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 0.25rem 0.75rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+}
+
+/* One card per room */
+.sow-room {
+  summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .hint {
+    margin-block: 0.5rem 0;
+  }
+}
+
+.sow-title {
+  margin: 0;
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+
+.sow-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* One row per task: task drop-down | times per week | remove */
+.sow-tasks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 1fr 9rem auto;
+    gap: 0.5rem;
+    align-items: center;
+    padding-block: 0.35rem;
+  }
+}
+
+.sow-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 0.75rem 0;
+
+}
+
+/* The Cleanable Area | Frequency table */
+.sow-table {
+  min-inline-size: 0;
+
+  th:last-child,
+  td:last-child {
+    inline-size: 9rem;
+    white-space: nowrap;
+  }
+
+  td,
+  th {
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+.sow-room-row td {
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+/* Inside the proposal sheet the colors are fixed, so the table must not follow dark mode */
+.sheet .sow-table {
+  th,
+  td {
+    border-color: #c9cfd8;
+    color: #111;
+  }
+
+  th,
+  .sow-room-row td {
+    background: #e3f3ed;
+  }
+}
+
+@media (max-width: 40rem) {
+  .sow-tasks li {
+    grid-template-columns: 1fr auto;
+
+    select:first-child {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@media print {
+  .sow-table {
+    break-inside: auto;
+  }
+
+  .sow-room-row {
+    break-after: avoid;
+  }
+
+  tr {
+    break-inside: avoid;
+  }
+}

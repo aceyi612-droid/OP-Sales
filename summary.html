@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Summary & Bid | Facility Walkthrough</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Microsoft sign-in library: only used if you fill in MS settings at the top of script.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.28.0/lib/msal-browser.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header class="bar">
+      <h1>
+        <img class="logo" src="images/logo.png" alt="" /> Summary &amp; Bid
+      </h1>
+      <nav aria-label="Main">
+        <a href="index.html">Walkthrough</a>
+        <a href="summary.html" aria-current="page">Summary &amp; Bid</a>
+        <a href="scope.html">Scope of Work</a>
+        <a href="proposal.html">Proposal</a>
+        <a href="saved.html">Saved</a>
+      </nav>
+      <div class="actions">
+        <button type="button" id="save" class="primary">Save</button>
+        <button type="button" id="new">New</button>
+        <output id="status" role="status"></output>
+      </div>
+    </header>
+
+    <main>
+      <form id="pricing" autocomplete="off">
+        <section class="card">
+          <h2>Building Summary: <span data-out="facility"></span></h2>
+          <p class="hint" data-out="context"></p>
+          <div class="tiles">
+            <div><b data-out="sqft">–</b><span>sq ft in areas</span></div>
+            <div>
+              <b data-out="carpetHard">–</b
+              ><span>carpet / hard floor sq ft</span>
+            </div>
+            <div>
+              <b data-out="fixtures">–</b><span>restroom fixtures</span>
+            </div>
+            <div><b data-out="floors">–</b><span>floors</span></div>
+          </div>
+          <p>
+            <b>Restroom fixtures:</b> <span data-out="toilets"></span> toilets ·
+            <span data-out="urinals"></span> urinals ·
+            <span data-out="sinks"></span> sinks ·
+            <span data-out="showers"></span> showers
+          </p>
+          <p><b>Pain points:</b> <span data-out="painLine"></span></p>
+        </section>
+
+        <section class="card">
+          <h2>Labor Estimate</h2>
+          <div class="tiles">
+            <div>
+              <b data-out="carpetHours">–</b><span>carpet hrs per clean</span>
+            </div>
+            <div>
+              <b data-out="hardHours">–</b><span>hard floor hrs per clean</span>
+            </div>
+            <div>
+              <b data-out="fixtureHours">–</b><span>fixture hrs per clean</span>
+            </div>
+            <div>
+              <b data-out="hoursPerClean">–</b><span>hrs per clean</span>
+            </div>
+            <div><b data-out="hours">–</b><span>hrs per month</span></div>
+          </div>
+          <p class="hint">
+            Rates used: carpet <span data-out="carpetRate"></span> sq ft/hr ·
+            hard floor <span data-out="hardRate"></span> sq ft/hr ·
+            <span data-out="fixtureMinutes"></span> min per fixture ·
+            <span data-out="cpw"></span> cleans per week
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>
+            Bid at <span data-out="rate"></span>/hr:
+            <span data-out="price"></span>/month
+          </h2>
+          <div class="tiles">
+            <div><b data-out="labor">–</b><span>direct labor</span></div>
+            <div><b data-out="gross">–</b><span>gross profit</span></div>
+            <div><b data-out="net">–</b><span>net profit</span></div>
+            <div><b data-out="annual">–</b><span>annual net profit</span></div>
+          </div>
+          <p class="hint">
+            Royalty tier <span data-out="royaltyTier"></span>. Click a row to
+            choose the proposal price.
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Rate</th>
+                  <th scope="col">Monthly billing</th>
+                  <th scope="col">Royalty</th>
+                  <th scope="col">Ad</th>
+                  <th scope="col">Labor</th>
+                  <th scope="col">Supply</th>
+                  <th scope="col">Gross</th>
+                  <th scope="col">GP %</th>
+                  <th scope="col">OpEx</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Net %</th>
+                </tr>
+              </thead>
+              <tbody id="bid-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card no-print">
+          <h2>Pricing Settings</h2>
+          <div class="grid">
+            <label
+              >Cleaner pay $/hr
+              <input type="number" name="p-cpay" step="any" />
+            </label>
+            <label
+              >Day porter pay $/hr
+              <input type="number" name="p-ppay" step="any" />
+            </label>
+            <label
+              >Supervisor pay $/hr
+              <input type="number" name="p-spay" step="any" />
+            </label>
+            <label
+              >Supervisor % time
+              <input type="number" name="p-spct" step="any" />
+            </label>
+            <label
+              >Loaded labor % (FICA, WC…)
+              <input type="number" name="p-load" step="any" />
+            </label>
+            <label
+              >Supplies % of billing
+              <input type="number" name="p-sup" step="any" />
+            </label>
+            <label
+              >Operating expense %
+              <input type="number" name="p-opex" step="any" />
+            </label>
+            <label
+              >Your total monthly billing $ (sets royalty tier)
+              <input type="number" name="p-mb" step="any" />
+            </label>
+            <label
+              >Ad fund %
+              <input type="number" name="p-ad" step="any" />
+            </label>
+            <label
+              >Lowest bill rate $/hr
+              <input type="number" name="p-start" step="any" />
+            </label>
+            <label
+              >Bill rate step $
+              <input type="number" name="p-step" step="any" />
+            </label>
+            <label
+              >Selected bill rate $/hr
+              <input type="number" name="p-sel" step="any" />
+            </label>
+            <label
+              >Override hrs/clean (blank=auto)
+              <input type="number" name="p-adj" step="any" />
+            </label>
+            <label
+              >Added travel hrs/clean
+              <input type="number" name="p-trav" step="any" />
+            </label>
+            <label
+              >Day porter hrs/visit
+              <input type="number" name="p-pH" step="any" />
+            </label>
+            <label
+              >Day porter visits/week
+              <input type="number" name="p-pF" step="any" />
+            </label>
+            <label
+              >Override carpet sq ft/hr
+              <input type="number" name="p-cR" step="any" />
+            </label>
+            <label
+              >Override hard floor sq ft/hr
+              <input type="number" name="p-hR" step="any" />
+            </label>
+            <label
+              >Override min/fixture
+              <input type="number" name="p-fM" step="any" />
+            </label>
+          </div>
+        </section>
+      </form>
+    </main>
+  </body>
+</html>

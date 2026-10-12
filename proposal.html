@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Proposal | Facility Walkthrough</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="scope.css" />
+    <!-- Microsoft sign-in library: only used if you fill in MS settings at the top of script.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.28.0/lib/msal-browser.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+    <script src="scope.js" defer></script>
+  </head>
+
+  <body>
+    <header class="bar">
+      <h1>
+        <img class="logo" src="images/logo.png" alt="" />
+        Proposal
+      </h1>
+      <nav aria-label="Main">
+        <a href="index.html">Walkthrough</a>
+        <a href="summary.html">Summary &amp; Bid</a>
+        <a href="scope.html">Scope of Work</a>
+        <a href="proposal.html" aria-current="page">Proposal</a>
+        <a href="saved.html">Saved</a>
+      </nav>
+      <div class="actions">
+        <button type="button" id="save" class="primary">Save</button>
+        <button type="button" id="new">New</button>
+        <output id="status" role="status"></output>
+      </div>
+    </header>
+
+    <main>
+      <p class="hint no-print">
+        Filled in from the walkthrough and bid. Click into the text to edit it
+        before saving as PDF (edits here are not stored).
+      </p>
+      <article class="sheet" contenteditable="true">
+        <h1>Cleaning Services Proposal</h1>
+
+        <section>
+          <h2>Prepared for</h2>
+          <p class="pre">
+            <span data-out="name"></span>
+            <span data-out="addr"></span>
+            Attn: <span data-out="contact"></span> <span data-out="date"></span>
+          </p>
+        </section>
+
+        <section>
+          <h2>What we heard</h2>
+          <p class="pre" data-out="pains"></p>
+        </section>
+
+        <section>
+          <h2>Scope of services</h2>
+          <p class="pre">
+            Facility: <span data-out="sqft"></span> sq ft (<span
+              data-out="carpet"
+            ></span>
+            carpet / <span data-out="hard"></span> hard floor),
+            <span data-out="floors"></span> floor(s) Restrooms:
+            <span data-out="fixtures"></span> fixtures (<span
+              data-out="toilets"
+            ></span>
+            toilets, <span data-out="urinals"></span> urinals,
+            <span data-out="sinks"></span> sinks,
+            <span data-out="showers"></span> showers) Frequency:
+            <span data-out="freq"></span> (<span data-out="cpw"></span> cleans
+            per week) Preferred time: <span data-out="time"></span> Proposed
+            start: <span data-out="start"></span>
+          </p>
+        </section>
+
+        <section>
+          <h2>Scope of Work</h2>
+          <div id="sow-proposal"></div>
+        </section>
+
+        <section>
+          <h2>Investment</h2>
+          <p class="pre">
+            Monthly investment: <span data-out="price"></span> Estimated service
+            hours per month: <span data-out="hours"></span>
+          </p>
+        </section>
+
+        <section>
+          <h2>Next steps</h2>
+          <p class="pre">
+            Expected decision date: <span data-out="decision"></span>
+            <span data-out="final"></span>
+          </p>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>
