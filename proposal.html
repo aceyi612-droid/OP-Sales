@@ -48,37 +48,47 @@
         <h1>Cleaning Services Proposal</h1>
 
         <section>
-          <h2>Prepared for</h2>
-          <p class="pre">
-            <span data-out="name"></span>
-            <span data-out="addr"></span>
-            Attn: <span data-out="contact"></span> <span data-out="date"></span>
-          </p>
+          <h2>Prepared For</h2>
+          <div class="lines">
+            <div data-out="name"></div>
+            <div data-out="addr"></div>
+            <div>Attn: <span data-out="contact"></span></div>
+            <div>Date: <span data-out="date"></span></div>
+          </div>
         </section>
 
         <section>
-          <h2>What we heard</h2>
+          <h2>What We Heard</h2>
           <p class="pre" data-out="pains"></p>
         </section>
 
         <section>
-          <h2>Scope of services</h2>
-          <p class="pre">
-            Facility: <span data-out="sqft"></span> sq ft (<span
-              data-out="carpet"
-            ></span>
-            carpet / <span data-out="hard"></span> hard floor),
-            <span data-out="floors"></span> floor(s) Restrooms:
-            <span data-out="fixtures"></span> fixtures (<span
-              data-out="toilets"
-            ></span>
-            toilets, <span data-out="urinals"></span> urinals,
-            <span data-out="sinks"></span> sinks,
-            <span data-out="showers"></span> showers) Frequency:
-            <span data-out="freq"></span> (<span data-out="cpw"></span> cleans
-            per week) Preferred time: <span data-out="time"></span> Proposed
-            start: <span data-out="start"></span>
-          </p>
+          <h2>Scope of Services</h2>
+          <div class="lines">
+            <div>
+              Facility: <span data-out="sqft"></span> Sq Ft (<span
+                data-out="carpet"
+              ></span>
+              Carpet / <span data-out="hard"></span> Hard Floor)
+            </div>
+            <div data-out="floorLine"></div>
+            <div>
+              Restrooms: <span data-out="fixtures"></span>&nbsp;Fixtures (<span
+                data-out="toilets"
+              ></span
+              >&nbsp;Toilets, <span data-out="urinals"></span>&nbsp;Urinals,
+              <span data-out="sinks"></span>&nbsp;Sinks,
+              <span data-out="showers"></span>&nbsp;Showers)
+            </div>
+            <div>
+              Frequency: <span data-out="freq"></span> (<span
+                data-out="cpw"
+              ></span>
+              Cleans Per Week)
+            </div>
+            <div>Preferred Time: <span data-out="time"></span></div>
+            <div>Proposed Start: <span data-out="start"></span></div>
+          </div>
         </section>
 
         <section>
@@ -89,15 +99,15 @@
         <section>
           <h2>Investment</h2>
           <p class="pre">
-            Monthly investment: <span data-out="price"></span> Estimated service
-            hours per month: <span data-out="hours"></span>
+            Monthly Investment: <span data-out="price"></span> Estimated Service
+            Hours Per Month: <span data-out="hours"></span>
           </p>
         </section>
 
         <section>
-          <h2>Next steps</h2>
+          <h2>Next Steps</h2>
           <p class="pre">
-            Expected decision date: <span data-out="decision"></span>
+            Expected Decision Date: <span data-out="decision"></span>
             <span data-out="final"></span>
           </p>
         </section>

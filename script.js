@@ -117,6 +117,15 @@ const session = (() => {
 let data = JSON.parse(session.getItem("draft") || "{}");
 const persist = () => session.setItem("draft", JSON.stringify(data));
 const value = (name) => data[name] ?? DEFAULTS[name] ?? "";
+/* "123 Main St, Atlanta, GA 30301" (older saves that only have the street line still work) */
+const fullAddress = () =>
+  [
+    value("addr"),
+    value("city"),
+    [value("state"), value("zip")].filter(Boolean).join(" "),
+  ]
+    .filter(Boolean)
+    .join(", ");
 const num = (name) => parseFloat(value(name)) || 0;
 
 /* Repeating table rows (Areas, Restrooms, Pain points).
@@ -397,7 +406,7 @@ function showResults() {
   const text = {
     facility: value("name") || "Unnamed facility",
     context: [
-      value("addr"),
+      fullAddress(),
       value("type"),
       `${e.industry || "Industry not set"} / ${value("den") || "Simple"}`,
     ]
@@ -413,6 +422,7 @@ function showResults() {
     sinks: e.sinks,
     showers: e.showers,
     floors: value("fl") || "–",
+    floorLine: value("fl") ? `Number of Floors: ${value("fl")}` : "",
     pains: pains.map((p) => `• ${p}`).join("\n") || "(none recorded)",
     painLine: pains.join("; ") || "(none recorded)",
     carpetHours: roundUp(e.carpetHours).toFixed(2),
@@ -432,7 +442,7 @@ function showResults() {
     rate: money(c.rate),
     price: money(c.invoice),
     name: value("name"),
-    addr: value("addr"),
+    addr: fullAddress(),
     contact: value("contact"),
     date: value("dt"),
     freq: value("rf"),
@@ -466,6 +476,18 @@ const status = (message) => {
 };
 
 $("save").addEventListener("click", async () => {
+  // The address is required: street, city, state and a 5-digit ZIP
+  const walkthroughForm = document.getElementById("wt");
+  const addressOk =
+    ["addr", "city", "state"].every((k) => String(data[k] || "").trim()) &&
+    /^\d{5}(-\d{4})?$/.test(String(data.zip || "").trim());
+  if (walkthroughForm) {
+    if (!walkthroughForm.reportValidity()) return; // shows the browser's "please fill in" message on the empty field
+  } else if (!addressOk) {
+    return status(
+      "Add the street address, city, state and ZIP on the Walkthrough page first",
+    );
+  }
   data["record-id"] ||= Date.now().toString(36);
   data.updated = new Date().toISOString();
   persist();

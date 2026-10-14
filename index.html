@@ -9,12 +9,14 @@
     <meta name="color-scheme" content="light dark" />
     <title>Walkthrough | Facility Walkthrough</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="photos.css" />
     <!-- Microsoft sign-in library: only used if you fill in MS settings at the top of script.js -->
     <script
       src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.28.0/lib/msal-browser.min.js"
       defer
     ></script>
     <script src="script.js" defer></script>
+    <script src="photos.js" defer></script>
   </head>
 
   <body>
@@ -58,10 +60,21 @@
               >Email
               <input type="email" name="email" />
             </label>
-            <label
-              >Facility Address
-              <input type="text" name="addr" />
-            </label>
+            <label>Street address *
+  <input type="text" name="addr" required>
+</label>
+<label>City *
+  <input type="text" name="city" required>
+</label>
+<label>State *
+  <select name="state" required>
+    <option value="">Choose…</option>
+    <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option><option>CO</option><option>CT</option><option>DE</option><option>DC</option><option>FL</option><option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+  </select>
+</label>
+<label>ZIP code *
+  <input type="text" name="zip" required inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10" title="5-digit ZIP code, like 30301">
+</label>
             <label
               >Date
               <input type="date" name="dt" />
@@ -89,7 +102,7 @@
               <input type="text" name="who" />
             </label>
             <label
-              >Did you hire them?
+              >Did You Hire Them?
               <select name="hired">
                 <option></option>
                 <option>Yes</option>
@@ -98,7 +111,7 @@
               </select>
             </label>
             <label
-              >How long?
+              >How Long?
               <input type="text" name="since" />
             </label>
             <label
@@ -120,7 +133,7 @@
               />
             </label>
             <label
-              ># Customers/Patients per day
+              ># Customers/Patients Per Day
               <input
                 type="number"
                 name="cust"
@@ -137,10 +150,10 @@
         </section>
 
         <section class="card">
-          <h2>Find the Pain</h2>
+          <h2>Find The Pain</h2>
           <div class="grid">
             <label
-              >Any issues with current service?
+              >Any Issues With Current Service?
               <select name="iss">
                 <option></option>
                 <option>Yes</option>
@@ -148,11 +161,11 @@
               </select>
             </label>
             <label class="wide"
-              >Main thing service could do better
+              >Main Thing Service Could Do Better
               <textarea name="better" rows="2"></textarea>
             </label>
             <label class="wide"
-              >Priority areas / concerns
+              >Priority Areas / Concerns
               <textarea name="prio" rows="2"></textarea>
             </label>
           </div>
@@ -161,9 +174,9 @@
             <table data-rows="ps" data-start="2">
               <thead>
                 <tr>
-                  <th scope="col">Customer pain point</th>
-                  <th scope="col">What we observed</th>
-                  <th scope="col">Proposed solution / benefit</th>
+                  <th scope="col">Customer Pain Point</th>
+                  <th scope="col">What We Observed</th>
+                  <th scope="col">Proposed Solution / Benefit</th>
                   <th class="no-print"></th>
                 </tr>
               </thead>
@@ -171,7 +184,7 @@
             </table>
           </div>
           <p class="no-print">
-            <button type="button" data-add-row="ps">+ Add row</button>
+            <button type="button" data-add-row="ps">+ Add Row</button>
           </p>
           <template data-for="ps"
             ><tr>
@@ -213,19 +226,19 @@
           <h2>Buying Process</h2>
           <div class="grid">
             <label
-              >Current spend / budget $ per month
+              >Current Spend / Budget $ Per Month
               <input type="text" name="bud" />
             </label>
             <label
-              >Decision makers
+              >Decision Makers
               <input type="text" name="dm" />
             </label>
             <label
-            <label>Contract expires
+            <label>Contract Expires
             <input type="date" name="exp">
             </label>
             <label
-              >Change process / approvals
+              >Change Process / Approvals
               <input type="text" name="proc" />
             </label>
           </div>
@@ -235,7 +248,7 @@
           <h2>Building Overview &amp; Bid Inputs</h2>
           <div class="grid">
             <label
-              >Total cleanable sq ft
+              >Total Cleanable Sq Ft
               <input
                 type="number"
                 name="sqft"
@@ -245,7 +258,7 @@
               />
             </label>
             <label
-              >Number of floors
+              >Number Of Floors
               <input
                 type="number"
                 name="fl"
@@ -255,7 +268,7 @@
               />
             </label>
             <label
-              >Cleans per week
+              >Cleans Per Week
               <input
                 type="number"
                 name="cpw"
@@ -265,15 +278,15 @@
               />
             </label>
             <label
-              >Preferred cleaning time
+              >Preferred Cleaning Time
               <input type="text" name="pt" />
             </label>
             <label
-              >Requested start date
+              >Requested Start Date
               <input type="date" name="sd" />
             </label>
             <label
-              >Current condition
+              >Current Condition
               <select name="cond">
                 <option></option>
                 <option>Excellent</option>
@@ -283,7 +296,7 @@
               </select>
             </label>
             <label
-              >Initial deep clean
+              >Initial Deep Clean
               <select name="dc">
                 <option></option>
                 <option>Yes</option>
@@ -291,7 +304,7 @@
               </select>
             </label>
             <label
-              >Industry (for production rates)
+              >Industry (For Production Rates)
               <select name="ind">
                 <option></option>
                 <option>Education</option>
@@ -339,11 +352,11 @@
               >
             </fieldset>
             <label class="wide"
-              >Access / security details
+              >Access / Security Details
               <textarea name="accd" rows="2"></textarea>
             </label>
             <fieldset class="checks wide">
-              <legend>Cleaning days</legend>
+              <legend>Cleaning Days</legend>
               <label
                 ><input type="checkbox" name="days" value="Sun" /> Sun</label
               >
@@ -367,7 +380,7 @@
               >
             </fieldset>
             <label class="wide"
-              >Special scheduling / compliance requirements
+              >Special Scheduling / Compliance Requirements
               <textarea name="spec" rows="2"></textarea>
             </label>
           </div>
@@ -377,7 +390,7 @@
           <h2>Janitor Closet &amp; Storage</h2>
           <div class="grid">
             <label
-              >Closet location
+              >Closet Location
               <input type="text" name="jl" />
             </label>
             <label
@@ -390,7 +403,7 @@
               </select>
             </label>
             <label
-              >Sink / water
+              >Sink / Water
               <select name="sink">
                 <option></option>
                 <option>Yes</option>
@@ -398,7 +411,7 @@
               </select>
             </label>
             <label
-              >Mop sink
+              >Mop Sink
               <select name="mop">
                 <option></option>
                 <option>Yes</option>
@@ -406,7 +419,7 @@
               </select>
             </label>
             <label
-              >Electrical outlet
+              >Electrical Outlet
               <select name="outl">
                 <option></option>
                 <option>Yes</option>
@@ -422,25 +435,25 @@
               </select>
             </label>
             <label
-              >Dumpster location
+              >Dumpster Location
               <input type="text" name="dump" />
             </label>
             <label
-              >Special request
+              >Special Request
               <input type="text" name="jr" />
             </label>
           </div>
         </section>
 
         <section class="card">
-          <h2>Building Details — Walk the Facility</h2>
+          <h2>Building Details — Walk The Facility</h2>
           <div class="table-scroll">
             <table data-rows="area" data-start="3">
               <thead>
                 <tr>
-                  <th scope="col">Area / room</th>
-                  <th scope="col">Sq ft</th>
-                  <th scope="col">Floor type</th>
+                  <th scope="col">Area / Room</th>
+                  <th scope="col">Sq Ft</th>
+                  <th scope="col">Floor Type</th>
                   <th scope="col">Frequency</th>
                   <th scope="col">Notes</th>
                   <th class="no-print"></th>
@@ -450,7 +463,7 @@
             </table>
           </div>
           <p class="no-print">
-            <button type="button" data-add-row="area">+ Add row</button>
+            <button type="button" data-add-row="area">+ Add Row</button>
           </p>
           <template data-for="area"
             ><tr>
@@ -505,7 +518,7 @@
         </section>
 
         <section class="card">
-          <h2>11. Restroom Fixture Count</h2>
+          <h2>Restroom Fixture Count</h2>
           <div class="table-scroll">
             <table data-rows="rr" data-start="2">
               <thead>
@@ -627,10 +640,10 @@
         </section>
 
         <section class="card">
-          <h2>Proposal &amp; Follow-up</h2>
+          <h2>Proposal &amp; Follow-Up</h2>
           <div class="grid">
             <label
-              >Proposal date
+              >Proposal Date
               <input type="date" name="pd" />
             </label>
             <label
@@ -643,31 +656,19 @@
               </select>
             </label>
             <label
-              >Who should be present?
+              >Who Should Be Present?
               <input type="text" name="pw" />
             </label>
             <label
-              >#1 buying criterion
-              <input type="text" name="b1" />
-            </label>
-            <label
-              >#2 buying criterion
-              <input type="text" name="b2" />
-            </label>
-            <label
-              >#3 buying criterion
-              <input type="text" name="b3" />
-            </label>
-            <label
-              >Expected decision date
+              >Expected Decision Date
               <input type="date" name="dd" />
             </label>
             <label
-              >Expected start date
+              >Expected Start Date
               <input type="date" name="st" />
             </label>
             <label class="wide"
-              >Final notes / commitments
+              >Final Notes / Commitments
               <textarea name="fin" rows="2"></textarea>
             </label>
           </div>

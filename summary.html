@@ -42,54 +42,54 @@
           <h2>Building Summary: <span data-out="facility"></span></h2>
           <p class="hint" data-out="context"></p>
           <div class="tiles">
-            <div><b data-out="sqft">–</b><span>sq ft in areas</span></div>
+            <div><b data-out="sqft">–</b><span>Sq Ft In Areas</span></div>
             <div>
               <b data-out="carpetHard">–</b
-              ><span>carpet / hard floor sq ft</span>
+              ><span>Carpet / Hard Floor Sq Ft</span>
             </div>
             <div>
-              <b data-out="fixtures">–</b><span>restroom fixtures</span>
+              <b data-out="fixtures">–</b><span>Restroom Fixtures</span>
             </div>
-            <div><b data-out="floors">–</b><span>floors</span></div>
+            <div><b data-out="floors">–</b><span>Floors</span></div>
           </div>
           <p>
-            <b>Restroom fixtures:</b> <span data-out="toilets"></span> toilets ·
-            <span data-out="urinals"></span> urinals ·
-            <span data-out="sinks"></span> sinks ·
-            <span data-out="showers"></span> showers
+            <b>Restroom Fixtures:</b> <span data-out="toilets"></span> Toilets
+            <span data-out="urinals"></span> Urinals
+            <span data-out="sinks"></span> Sinks
+            <span data-out="showers"></span> Showers
           </p>
-          <p><b>Pain points:</b> <span data-out="painLine"></span></p>
+          <p><b>Pain Points:</b> <span data-out="painLine"></span></p>
         </section>
 
         <section class="card">
           <h2>Labor Estimate</h2>
           <div class="tiles">
             <div>
-              <b data-out="carpetHours">–</b><span>carpet hrs per clean</span>
+              <b data-out="carpetHours">–</b><span>Carpet hrs Per Clean</span>
             </div>
             <div>
-              <b data-out="hardHours">–</b><span>hard floor hrs per clean</span>
+              <b data-out="hardHours">–</b><span>Hard Floor Hrs Per Clean</span>
             </div>
             <div>
-              <b data-out="fixtureHours">–</b><span>fixture hrs per clean</span>
+              <b data-out="fixtureHours">–</b><span>Fixture hrs Per Clean</span>
             </div>
             <div>
-              <b data-out="hoursPerClean">–</b><span>hrs per clean</span>
+              <b data-out="hoursPerClean">–</b><span>Hrs Per Clean</span>
             </div>
-            <div><b data-out="hours">–</b><span>hrs per month</span></div>
+            <div><b data-out="hours">–</b><span>Hrs Per Month</span></div>
           </div>
           <p class="hint">
-            Rates used: carpet <span data-out="carpetRate"></span> sq ft/hr ·
-            hard floor <span data-out="hardRate"></span> sq ft/hr ·
-            <span data-out="fixtureMinutes"></span> min per fixture ·
-            <span data-out="cpw"></span> cleans per week
+            Rates Used: arpet <span data-out="carpetRate"></span> Sq ft/Hr ·
+            hard floor <span data-out="hardRate"></span> Sq Ft/Hr ·
+            <span data-out="fixtureMinutes"></span> Min Per Fixture ·
+            <span data-out="cpw"></span> Cleans Per Week
           </p>
         </section>
 
         <section class="card">
           <h2>
-            Bid at <span data-out="rate"></span>/hr:
-            <span data-out="price"></span>/month
+            Bid at <span data-out="rate"></span>/Hr:
+            <span data-out="price"></span>/Month
           </h2>
           <div class="tiles">
             <div><b data-out="labor">–</b><span>direct labor</span></div>
@@ -98,7 +98,7 @@
             <div><b data-out="annual">–</b><span>annual net profit</span></div>
           </div>
           <p class="hint">
-            Royalty tier <span data-out="royaltyTier"></span>. Click a row to
+            Royalty Tier <span data-out="royaltyTier"></span>. Click a row to
             choose the proposal price.
           </p>
           <div class="table-scroll">
@@ -127,79 +127,79 @@
           <h2>Pricing Settings</h2>
           <div class="grid">
             <label
-              >Cleaner pay $/hr
+              >Cleaner Pay $/Hr
               <input type="number" name="p-cpay" step="any" />
             </label>
             <label
-              >Day porter pay $/hr
+              >Day Porter Pay $/Hr
               <input type="number" name="p-ppay" step="any" />
             </label>
             <label
-              >Supervisor pay $/hr
+              >Supervisor Pay $/Hr
               <input type="number" name="p-spay" step="any" />
             </label>
             <label
-              >Supervisor % time
+              >Supervisor % Time
               <input type="number" name="p-spct" step="any" />
             </label>
             <label
-              >Loaded labor % (FICA, WC…)
+              >Loaded Labor % (FICA, WC…)
               <input type="number" name="p-load" step="any" />
             </label>
             <label
-              >Supplies % of billing
+              >Supplies % of Billing
               <input type="number" name="p-sup" step="any" />
             </label>
             <label
-              >Operating expense %
+              >Operating Expense %
               <input type="number" name="p-opex" step="any" />
             </label>
             <label
-              >Your total monthly billing $ (sets royalty tier)
+              >Your Total Monthly Billing $ (Sets Royalty Tier)
               <input type="number" name="p-mb" step="any" />
             </label>
             <label
-              >Ad fund %
+              >Ad Fund %
               <input type="number" name="p-ad" step="any" />
             </label>
             <label
-              >Lowest bill rate $/hr
+              >Lowest Bill Rate $/Hr
               <input type="number" name="p-start" step="any" />
             </label>
             <label
-              >Bill rate step $
+              >Bill Rate Step $
               <input type="number" name="p-step" step="any" />
             </label>
             <label
-              >Selected bill rate $/hr
+              >Selected Bill Rate $/Hr
               <input type="number" name="p-sel" step="any" />
             </label>
             <label
-              >Override hrs/clean (blank=auto)
+              >Override Hrs/Clean
               <input type="number" name="p-adj" step="any" />
             </label>
             <label
-              >Added travel hrs/clean
+              >Added Travel Hrs/Clean
               <input type="number" name="p-trav" step="any" />
             </label>
             <label
-              >Day porter hrs/visit
+              >Day Porter Hrs/Visit
               <input type="number" name="p-pH" step="any" />
             </label>
             <label
-              >Day porter visits/week
+              >Day Porter Visits/Week
               <input type="number" name="p-pF" step="any" />
             </label>
             <label
-              >Override carpet sq ft/hr
+              >Override Carpet Sq Ft/Hr
               <input type="number" name="p-cR" step="any" />
             </label>
             <label
-              >Override hard floor sq ft/hr
+              >Override Hard Floor Sq Ft/Hr
               <input type="number" name="p-hR" step="any" />
             </label>
             <label
-              >Override min/fixture
+              >Override Min/Fixture
               <input type="number" name="p-fM" step="any" />
             </label>
           </div>

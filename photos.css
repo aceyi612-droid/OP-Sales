@@ -1,0 +1,112 @@
+/* Photos in the Walkthrough tables (pain points and areas) */
+/* Each cell: text field on the left, photo thumbnails on the right, "+ Photo" button underneath both */
+.photo-cell {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) auto;
+  gap: 0.35rem 0.6rem;
+  align-items: start;
+}
+
+.photos {
+  display: contents; /* its two parts sit directly in the grid above */
+}
+
+.photo-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  max-inline-size: 15rem; /* about 3 thumbnails per row, then they wrap */
+}
+
+.photo-thumbs:empty {
+  display: none;
+}
+
+.photo-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  button[data-photo-add] {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+}
+
+.photo-count {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.photo-thumb {
+  position: relative;
+  display: inline-block;
+  inline-size: 4.5rem;
+  block-size: 4.5rem;
+
+  img {
+    inline-size: 100%;
+    block-size: 100%;
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    object-fit: cover;
+    cursor: zoom-in;
+  }
+
+  button {
+    position: absolute;
+    inset: 0.15rem 0.15rem auto auto;
+    display: grid;
+    place-items: center;
+    inline-size: 1.3rem;
+    block-size: 1.3rem;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+}
+
+/* The enlarged photo */
+.photo-viewer {
+  max-inline-size: min(95vw, 60rem);
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text);
+
+  img {
+    display: block;
+    max-inline-size: 100%;
+    max-block-size: 80vh;
+    margin-inline: auto;
+  }
+
+  form {
+    margin-block-start: 0.5rem;
+    text-align: end;
+  }
+}
+
+.photo-viewer::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+
+@media print {
+  .photo-count {
+    display: none;
+  }
+
+  .photo-thumb {
+    break-inside: avoid;
+    inline-size: 6rem;
+    block-size: 6rem;
+  }
+}
