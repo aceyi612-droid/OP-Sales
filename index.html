@@ -393,13 +393,17 @@
             </label>
             <label
               >Cleans Per Week
-              <input
-                type="number"
-                name="cpw"
-                inputmode="decimal"
-                min="0"
-                step="any"
-              />
+              <select name="cpw">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+              </select>
+            </label>
             </label>
             <label
               >Preferred Cleaning Time
@@ -533,27 +537,66 @@
           <p class="no-print">
             <button type="button" data-add-row="area">+ Add Row</button>
           </p>
-          <template data-for="area"
-          ><tr>
-            <td data-label="Area / room">
-              <input type="text" name="area-n-{i}" aria-label="Area / room, row {i}" />
-            </td>
-            <td data-label="Sq ft">
-              <input type="number" name="area-sf-{i}" ... />
-            </td>
-            <td data-label="Floor type">
-              <select name="area-ft-{i}" ...>
-            </td>
-            <td data-label="Frequency">
-              <select name="area-fr-{i}" ...>
-            </td>
-            <td data-label="Notes">
-              <textarea rows="1" name="area-nt-{i}" ...></textarea>
-            </td>
-            <td class="photo-col" data-label="Photos">
-              <div data-photos="area-photos-{i}"></div>
-            </td>
-             <td class="no-print"> 
+                    <template data-for="area"
+            ><tr>
+              <td data-label="Area / room">
+                <input
+                  type="text"
+                  name="area-n-{i}"
+                  aria-label="Area / room, row {i}"
+                />
+              </td>
+              <td data-label="Sq ft">
+                <input
+                  type="number"
+                  name="area-sf-{i}"
+                  aria-label="Sq ft, row {i}"
+                  inputmode="decimal"
+                  min="0"
+                  step="any"
+                />
+              </td>
+              <td data-label="Floor type">
+                <select name="area-ft-{i}" aria-label="Floor type, row {i}">
+                  <option></option>
+                  <option>Carpet</option>
+                  <option>VCT</option>
+                  <option>LVT</option>
+                  <option>Tile/Ceramic</option>
+                  <option>Concrete</option>
+                  <option>Wood</option>
+                  <option>Other hard</option>
+                </select>
+              </td>
+              <td data-label="Frequency">
+                <select name="area-fr-{i}" aria-label="Frequency, row {i}">
+                  <option></option>
+                  <option>1x</option>
+                  <option>2x</option>
+                  <option>3x</option>
+                  <option>4x</option>
+                  <option>5x</option>
+                  <option>6x</option>
+                  <option>7x</option>
+                  <option>Bi-weekly</option>
+                  <option>Monthly</option>
+                </select>
+              </td>
+              <td data-label="Notes">
+                <textarea
+                  rows="1"
+                  name="area-nt-{i}"
+                  aria-label="Notes, row {i}"
+                ></textarea>
+              </td>
+              <td class="photo-col" data-label="Photos">
+                <div data-photos="area-photos-{i}"></div>
+              </td>
+              <td class="no-print">
+                <button
+                  type="button"
+                  data-remove-row
+                  aria-label="Remove this row"
                 >
                   ✕
                 </button>
