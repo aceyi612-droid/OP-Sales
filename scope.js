@@ -470,7 +470,11 @@
                 .join(""),
           )
           .join("")}</tbody></table></div>`
-      : '<p class="hint">No tasks selected yet. Open a room above and choose its tasks.</p>';
+      : `<p class="hint">${
+          byId("sow-editor")
+            ? "No tasks selected yet. Open a room above and choose its tasks."
+            : "No tasks selected yet. Choose them on the Scope of Work page."
+        }</p>`;
     for (const id of ["sow-preview", "sow-proposal", "scope-proposal"]) {
       if (byId(id)) byId(id).innerHTML = html;
     }

@@ -64,7 +64,7 @@ const DEFAULTS = {
   "p-cR": "",
   "p-hR": "",
   "p-fM": "",
-  dt: new Date().toISOString().slice(0, 10),
+  dt: new Date().toLocaleDateString("en-CA"), // today, in the local time zone (YYYY-MM-DD)
 };
 
 /* Storage that never crashes if the browser blocks it */
@@ -257,7 +257,13 @@ const storage = {
     });
   },
   async load(id) {
-    if (!useMicrosoft) return JSON.parse(memory.get(`wt-${id}`));
+    if (!useMicrosoft) {
+      try {
+        return JSON.parse(memory.get(`wt-${id}`));
+      } catch {
+        return null; // missing or unreadable record
+      }
+    }
     return (await graph(`${folder()}/${id}.json:/content`))?.json();
   },
   async list() {
@@ -470,6 +476,18 @@ function showResults() {
     final: value("fin"),
   };
   targets.forEach((el) => (el.textContent = text[el.dataset.out] ?? ""));
+
+  /* Proposal: hide a line when everything filled into it is empty (for example "Proposed Start:").
+     Add data-hide-if="freq" to a line to hide it based on that one value only. */
+  document.querySelectorAll(".sheet .lines > div").forEach((line) => {
+    const key = line.dataset.hideIf;
+    const outs = key
+      ? [...line.querySelectorAll(`[data-out="${key}"]`)]
+      : line.matches("[data-out]")
+        ? [line]
+        : [...line.querySelectorAll("[data-out]")];
+    line.hidden = outs.length > 0 && outs.every((el) => !el.textContent.trim());
+  });
 
   if ($("bid-rows")) {
     $("bid-rows").innerHTML = e.rows
