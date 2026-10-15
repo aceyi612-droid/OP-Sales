@@ -61,7 +61,6 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-block: 0.75rem 0;
-
 }
 
 /* The Cleanable Area | Frequency table */
@@ -120,5 +119,13 @@
 
   tr {
     break-inside: avoid;
+  }
+}
+
+/* Phones: the Industry and Default Frequency drop-downs sit side by side, so line them up along the bottom
+   even when one label wraps onto two lines */
+@media screen and (max-width: 40rem) {
+  .grid:has(#sow-industry) {
+    align-items: end;
   }
 }

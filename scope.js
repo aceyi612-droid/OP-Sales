@@ -247,10 +247,13 @@
         switched off, rooms {room: {tasks: [{t, f}]}}, custom [{id, name}] */
   const sow = () =>
     (data.sow ??= { rooms: {}, off: {}, custom: [], nextId: 1 });
-  const industry = () =>
-    sow().industry || FROM_WALKTHROUGH[value("ind")] || "Office";
+  /* Industry chosen on the walkthrough: mapped ones as above, any other chosen industry is "Office",
+     and nothing chosen at all starts as "All" */
+  const fromWalkthrough = () =>
+    FROM_WALKTHROUGH[value("ind")] || (value("ind") ? "Office" : "All");
+  const industry = () => sow().industry || fromWalkthrough();
   const defaultFreq = () =>
-    sow().freq || Math.min(7, Math.max(1, Math.round(num("cpw")) || 5));
+    sow().freq || Math.min(7, Math.max(1, Math.round(num("cpw")) || 1));
   const peek = (key) =>
     (sow().rooms[key]?.tasks || []).filter((t) => t.t.trim());
   const tasksOf = (key) => (sow().rooms[key] ??= { tasks: [] }).tasks; // every row, including ones still blank
