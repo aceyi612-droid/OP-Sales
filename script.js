@@ -428,7 +428,7 @@ function showResults() {
   ].filter(Boolean);
 
   const text = {
-    facility: value("name") || "Unnamed facility",
+    facility: value("name") || "Unnamed Facility",
     context: [
       fullAddress(),
       value("type"),
