@@ -17,6 +17,7 @@
     ></script>
     <script src="script.js" defer></script>
     <script src="photos.js" defer></script>
+    <script src="mobile.js" defer></script>
   </head>
 
   <body>
@@ -330,28 +331,28 @@
           </p>
           <template data-for="ps"
             ><tr>
-              <td>
+              <td data-label="Customer pain point">
                 <textarea
                   rows="1"
                   name="ps-p-{i}"
                   aria-label="Customer pain point, row {i}"
                 ></textarea>
               </td>
-              <td>
+              <td data-label="What we observed">
                 <textarea
                   rows="1"
                   name="ps-o-{i}"
                   aria-label="What we observed, row {i}"
                 ></textarea>
               </td>
-              <td>
+              <td data-label="Proposed solution / benefit">
                 <textarea
                   rows="1"
                   name="ps-s-{i}"
-                  aria-label="Proposed solution, row {i}"
+                  aria-label="Proposed solution / benefit, row {i}"
                 ></textarea>
               </td>
-              <td class="photo-col">
+              <td class="photo-col" data-label="Photos">
                 <div data-photos="ps-photos-{i}"></div>
               </td>
               <td class="no-print">
@@ -533,65 +534,26 @@
             <button type="button" data-add-row="area">+ Add Row</button>
           </p>
           <template data-for="area"
-            ><tr>
-              <td>
-                <input
-                  type="text"
-                  name="area-n-{i}"
-                  aria-label="Area / room, row {i}"
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  name="area-sf-{i}"
-                  aria-label="Sq ft, row {i}"
-                  inputmode="decimal"
-                  min="0"
-                  step="any"
-                />
-              </td>
-              <td>
-                <select name="area-ft-{i}" aria-label="Floor type, row {i}">
-                  <option></option>
-                  <option>Carpet</option>
-                  <option>VCT</option>
-                  <option>LVT</option>
-                  <option>Tile/Ceramic</option>
-                  <option>Concrete</option>
-                  <option>Wood</option>
-                  <option>Other hard</option>
-                </select>
-              </td>
-              <td>
-                <select name="area-fr-{i}" aria-label="Frequency, row {i}">
-                  <option></option>
-                  <option>1x</option>
-                  <option>2x</option>
-                  <option>3x</option>
-                  <option>4x</option>
-                  <option>5x</option>
-                  <option>6x</option>
-                  <option>7x</option>
-                  <option>Bi-weekly</option>
-                  <option>Monthly</option>
-                </select>
-              </td>
-              <td>
-                <textarea
-                  rows="1"
-                  name="area-nt-{i}"
-                  aria-label="Notes, row {i}"
-                ></textarea>
-              </td>
-              <td class="photo-col">
-                <div data-photos="area-photos-{i}"></div>
-              </td>
-              <td class="no-print">
-                <button
-                  type="button"
-                  data-remove-row
-                  aria-label="Remove this row"
+          ><tr>
+            <td data-label="Area / room">
+              <input type="text" name="area-n-{i}" aria-label="Area / room, row {i}" />
+            </td>
+            <td data-label="Sq ft">
+              <input type="number" name="area-sf-{i}" ... />
+            </td>
+            <td data-label="Floor type">
+              <select name="area-ft-{i}" ...>
+            </td>
+            <td data-label="Frequency">
+              <select name="area-fr-{i}" ...>
+            </td>
+            <td data-label="Notes">
+              <textarea rows="1" name="area-nt-{i}" ...></textarea>
+            </td>
+            <td class="photo-col" data-label="Photos">
+              <div data-photos="area-photos-{i}"></div>
+            </td>
+             <td class="no-print"> 
                 >
                   ✕
                 </button>

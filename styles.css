@@ -476,3 +476,190 @@ input[type="date"] {
   min-block-size: 2.4rem; /* Safari draws empty date boxes shorter than other inputs */
   text-align: start;
 }
+
+/* ==========================================================
+   PHONES (40rem and narrower): a shorter, calmer layout
+   ========================================================== */
+@media screen and (max-width: 40rem) {
+  /* 1. HEADER: one slim row. The five pages become a bar along the bottom. */
+  body {
+    padding-block-end: calc(3.5rem + env(safe-area-inset-bottom));
+  }
+  .bar {
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+    padding-block: 0.4rem;
+  }
+  .bar h1 {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    font-size: 1rem;
+    margin: 0;
+  }
+  .bar .logo {
+    block-size: 1.6rem;
+  }
+  .bar .actions button {
+    flex: none;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  .bar nav {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 6;
+    display: flex;
+    padding-block-end: env(safe-area-inset-bottom);
+    background: var(--card);
+    border-block-start: 1px solid var(--border);
+  }
+  .bar nav a {
+    flex: 1 1 0;
+    display: grid;
+    place-items: center;
+    min-block-size: 3.25rem;
+    padding: 0.25rem 0.15rem;
+    border: 0;
+    border-radius: 0;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.15;
+    text-align: center;
+    white-space: normal;
+
+    &[aria-current="page"] {
+      background: none;
+      box-shadow: inset 0 3px 0 var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+  }
+  /* "Saved ✓" shows as a small message above the tab bar */
+  .bar output {
+    position: fixed;
+    inset: auto 1rem calc(4rem + env(safe-area-inset-bottom)) 1rem;
+    z-index: 7;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* 2. CARDS AND FIELDS */
+  main {
+    inline-size: min(100% - 1rem, 70rem);
+    padding-block: 0.5rem;
+  }
+  .card {
+    margin-block-end: 0.6rem;
+    padding: 0.75rem;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .grid > label {
+    grid-column: 1 / -1;
+  }
+  .grid
+    > label:has(
+      > select,
+      > input[type="number"],
+      > input[type="date"],
+      > input[name="zip"]
+    ) {
+    grid-column: auto; /* short fields sit two to a row */
+  }
+  .card > p.no-print > button[data-add-row] {
+    inline-size: 100%;
+  }
+
+  /* 3. TABLES BECOME ROW CARDS (Building Details and Pain → Solution) */
+  :is(table[data-rows="area"], table[data-rows="ps"]) {
+    display: block;
+    min-inline-size: 0;
+
+    thead {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    tbody {
+      display: block;
+    }
+    tr {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.25rem 0.6rem;
+      margin-block-end: 0.6rem;
+      padding: 0.5rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+    }
+    td {
+      display: block;
+      grid-column: 1 / -1;
+      padding: 0.15rem 0;
+      border: 0;
+    }
+    td[data-label]::before {
+      content: attr(data-label);
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    td :is(input, select, textarea) {
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-size: 1rem; /* 16px stops iPhone Safari zooming in on tap */
+    }
+    td.no-print:last-child {
+      text-align: end;
+    }
+  }
+  table[data-rows="area"] td:is(:nth-child(2), :nth-child(3), :nth-child(4)) {
+    grid-column: auto; /* Sq ft, Floor type, Frequency side by side */
+  }
+
+  /* 4. FOLDING SECTIONS (mobile.js adds .collapsed) */
+  form > .card > h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      flex: none;
+      inline-size: 0.5rem;
+      block-size: 0.5rem;
+      border-inline-end: 2px solid currentcolor;
+      border-block-end: 2px solid currentcolor;
+      transform: rotate(45deg);
+      transition: transform 0.15s;
+    }
+  }
+  form > .card.collapsed > h2 {
+    margin: 0;
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+  form > .card.collapsed > :not(h2) {
+    display: none;
+  }
+
+  /* 5. BID TABLE: only Rate, Monthly billing, GP %, Net and Net % on a phone */
+  table:has(#bid-rows) {
+    min-inline-size: 0;
+
+    :is(th, td):is(:nth-child(n + 3):nth-child(-n + 7), :nth-child(9)) {
+      display: none;
+    }
+  }
+}
