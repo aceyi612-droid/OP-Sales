@@ -264,9 +264,73 @@ th {
   background: var(--accent-soft);
 }
 
-td :is(input, select) {
+td :is(input, select, textarea) {
   border: 0;
   background: transparent;
+}
+
+/* Notes boxes fill their column and grow taller so all the text is visible */
+td textarea {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  overflow: hidden;
+  resize: none;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere; /* even one very long word wraps instead of running off the box */
+}
+/* Building details and pain points: small fixed columns, the notes column takes the rest */
+table[data-rows="area"],
+table[data-rows="ps"] {
+  table-layout: fixed;
+  min-inline-size: 48rem;
+
+  td {
+    vertical-align: top;
+  }
+}
+
+table[data-rows="area"] {
+  th:nth-child(1) {
+    inline-size: 9rem;
+  } /* Area / room */
+  th:nth-child(2) {
+    inline-size: 5rem;
+  } /* Sq ft */
+  th:nth-child(3) {
+    inline-size: 5rem;
+  } /* Floor type */
+  th:nth-child(4) {
+    inline-size: 6rem;
+  } /* Frequency */
+  th:nth-child(5) {
+    inline-size: 12.5rem;
+  } /* Notes*/
+  th:nth-child(6) {
+    inline-size: 5rem;
+  } /* Photos */
+  th:nth-child(7) {
+    inline-size: 2.75rem;
+  } /* Remove button */
+}
+
+table[data-rows="ps"] {
+  th:nth-child(1) {
+    inline-size: 7rem;
+  } /* Customer pain point */
+  th:nth-child(2) {
+    inline-size: 7rem;
+  } /* What we observed */
+  th:nth-child(3) {
+    inline-size: 12.5rem;
+  } /* Proposed Solution */
+  th:nth-child(4) {
+    inline-size: 5rem;
+  } /* Photos */
+  th:nth-child(5) {
+    inline-size: 2.75rem;
+  } /* Remove button */
 }
 
 tr.selected td {

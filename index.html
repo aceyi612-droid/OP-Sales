@@ -177,6 +177,7 @@
                   <th scope="col">Customer Pain Point</th>
                   <th scope="col">What We Observed</th>
                   <th scope="col">Proposed Solution / Benefit</th>
+                  <th scope="col">Photos</th>
                   <th class="no-print"></th>
                 </tr>
               </thead>
@@ -189,25 +190,28 @@
           <template data-for="ps"
             ><tr>
               <td>
-                <input
-                  type="text"
+                <textarea
+                  rows="1"
                   name="ps-p-{i}"
                   aria-label="Customer pain point, row {i}"
-                />
+                ></textarea>
               </td>
               <td>
-                <input
-                  type="text"
+                <textarea
+                  rows="1"
                   name="ps-o-{i}"
                   aria-label="What we observed, row {i}"
-                />
+                ></textarea>
               </td>
               <td>
-                <input
-                  type="text"
+                <textarea
+                  rows="1"
                   name="ps-s-{i}"
                   aria-label="Proposed solution / benefit, row {i}"
-                />
+                ></textarea>
+              </td>
+              <td class="photo-col">
+                <div data-photos="ps-photos-{i}"></div>
               </td>
               <td class="no-print">
                 <button
@@ -456,6 +460,7 @@
                   <th scope="col">Floor Type</th>
                   <th scope="col">Frequency</th>
                   <th scope="col">Notes</th>
+                  <th scope="col">Photos</th>
                   <th class="no-print"></th>
                 </tr>
               </thead>
@@ -496,13 +501,28 @@
                   <option>Other hard</option>
                 </select>
               </td>
-              <td><select name="area-fr-{i}" aria-label="Frequency, row {i}"><option></option><option>1x</option><option>2x</option><option>3x</option><option>4x</option><option>5x</option><option>6x</option><option>7x</option><option>Bi-weekly</option><option>Monthly</option></select></td>
-              <td>
-                <input
-                  type="text"
+              <td><select name="area-fr-{i}" aria-label="Frequency, row {i}">
+                  <option></option>
+                  <option>1x</option>
+                  <option>2x</option>
+                  <option>3x</option>
+                  <option>4x</option>
+                  <option>5x</option>
+                  <option>6x</option>
+                  <option>7x</option>
+                  <option>Bi-weekly</option>
+                  <option>Monthly</option>
+                </select>
+              </td>
+               <td>
+                <textarea
+                  rows="1"
                   name="area-nt-{i}"
                   aria-label="Notes, row {i}"
-                />
+                ></textarea>
+              </td>
+              <td class="photo-col">
+                <div data-photos="area-photos-{i}"></div>
               </td>
               <td class="no-print">
                 <button

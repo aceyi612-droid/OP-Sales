@@ -1,21 +1,16 @@
 /* Photos in the Walkthrough tables (pain points and areas) */
-/* Each cell: text field on the left, photo thumbnails on the right, "+ Photo" button underneath both */
-.photo-cell {
-  display: grid;
-  grid-template-columns: minmax(9rem, 1fr) auto;
-  gap: 0.35rem 0.6rem;
-  align-items: start;
-}
-
+/* Photos column: thumbnails first, then the "+ Photo" button and count underneath */
 .photos {
-  display: contents; /* its two parts sit directly in the grid above */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
 }
 
 .photo-thumbs {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  max-inline-size: 15rem; /* about 3 thumbnails per row, then they wrap */
 }
 
 .photo-thumbs:empty {
@@ -23,7 +18,6 @@
 }
 
 .photo-actions {
-  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   gap: 0.5rem;

@@ -228,3 +228,39 @@
   decorate();
   drawAll();
 })();
+
+// Notes / Proposed solution boxes: grow taller to show every line (the width never changes)
+(() => {
+  const fit = (el) => {
+    el.style.blockSize = "auto";
+    if (el.scrollHeight) el.style.blockSize = `${el.scrollHeight}px`;
+  };
+  const lastWidth = new WeakMap();
+  const resized = new ResizeObserver((entries) => {
+    for (const { target, contentRect } of entries) {
+      if (lastWidth.get(target) === contentRect.width) continue;
+      lastWidth.set(target, contentRect.width);
+      fit(target);
+    }
+  });
+  const fitAll = () =>
+    document.querySelectorAll("td textarea").forEach((el) => {
+      resized.observe(el);
+      fit(el);
+    });
+
+  document.addEventListener("input", (event) => {
+    if (event.target.matches("td textarea")) fit(event.target);
+  });
+  window.addEventListener("resize", fitAll);
+  window.addEventListener("beforeprint", fitAll);
+  const rebuilt = new MutationObserver(fitAll); // rows are redrawn when added, removed or a walkthrough opens
+  document
+    .querySelectorAll("[data-rows]")
+    .forEach(
+      (table) =>
+        table.tBodies[0] &&
+        rebuilt.observe(table.tBodies[0], { childList: true }),
+    );
+  fitAll();
+})();
