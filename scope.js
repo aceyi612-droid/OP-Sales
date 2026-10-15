@@ -189,11 +189,11 @@
   ];
 
   const TASKS = [
-    "Clean and Disinfect all Horizontal Surfaces",
-    "Clean and Disinfect all Sinks",
-    "Clean and Disinfect all Sinks and Countertops",
-    "Clean and Disinfect all Toilets and Urinals",
-    "Clean and Disinfect all Walls and Partitions",
+    "Clean and Disinfect All Horizontal Surfaces",
+    "Clean and Disinfect All Sinks",
+    "Clean and Disinfect All Sinks and Countertops",
+    "Clean and Disinfect All Toilets and Urinals",
+    "Clean and Disinfect All Walls and Partitions",
     "Clean and Disinfect Hard Surface Floors",
     "Clean Baseboards",
     "Clean Drinking Fountain",
@@ -215,12 +215,12 @@
     "Keep Neat and Organized",
     "Mop Floors",
     "Mop/Vacuum Floors",
-    "Organize all chairs around tables",
+    "Organize All Chairs Around Tables",
     "Organize Desk and Tables",
     "Polish Doors and Walls",
-    "Polish Tables to remove prints",
-    "Remove Fingerprints from Partition Glass",
-    "Restock all Products",
+    "Polish Tables To Remove Prints",
+    "Remove Fingerprints From Partition Glass",
+    "Restock All Products",
     "Spot Mop Hard Surface Floor",
     "Spot Vacuum Carpet/Mats",
     "Spot Vacuum Carpeting",
@@ -357,7 +357,7 @@
   /* 4. DRAWING */
   /* The choices in every frequency drop-down: 1-7 times a week, then the longer cycles */
   const FREQUENCIES = [1, 2, 3, 4, 5, 6, 7, "Bi-weekly", "Monthly"];
-  const freqLabel = (f) => (typeof f === "number" ? `${f}x per week` : f);
+  const freqLabel = (f) => (typeof f === "number" ? `${f}x Per Week` : f);
   const freqValue = (text) => (/^\d+$/.test(text) ? Number(text) : text); // "3" -> 3, "Monthly" stays text
 
   const freqOptions = (current) =>
@@ -465,7 +465,7 @@
               peek(c.key)
                 .map(
                   (t) =>
-                    `<tr><td>${esc(t.t)}</td><td>${esc(t.f)}x per week</td></tr>`,
+                    `<tr><td>${esc(t.t)}</td><td>${esc(freqLabel(t.f))}</td></tr>`,
                 )
                 .join(""),
           )
@@ -495,7 +495,7 @@
     if (el.id === "sow-industry") {
       sow().industry = el.value;
     } else if (el.id === "sow-freq") {
-      sow().freq = Number(el.value);
+      sow().freq = freqValue(el.value);
       return save();
     } else if (d.room !== undefined) {
       const key = cardList[d.room].key;
@@ -518,7 +518,7 @@
       return;
     } else if (d.freq) {
       const [n, j] = at(d.freq);
-      tasksOf(cardList[n].key)[j].f = Number(el.value);
+      tasksOf(cardList[n].key)[j].f = freqValue(el.value);
       save();
       return drawPreview(); // no redraw of the cards, so nothing jumps
     } else return;
@@ -584,5 +584,9 @@
     }
   });
   addEventListener("pageshow", (event) => event.persisted && location.reload()); // back button: reload fresh data
+  // Rooms that already have tasks start open, so every task is visible when you come back to this page
+  for (const [key, room] of Object.entries(sow().rooms)) {
+    if (room.tasks.some((t) => t.t.trim())) openRooms.add(key);
+  }
   render();
 })();

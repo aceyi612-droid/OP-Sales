@@ -403,6 +403,24 @@ function showResults() {
   }
   const pains = painList.filter(Boolean);
 
+  /* Proposal "Pain Points": "• pain point - what we observed", then the proposed solution underneath */
+  const painBlocks = [
+    ...[value("p1"), value("p2"), value("p3")]
+      .filter(Boolean)
+      .map((p) => `• ${p}`), // older saves
+    ...rowIndexes("ps").map((i) => {
+      const pain = String(value(`ps-p-${i}`)).trim();
+      const seen = String(value(`ps-o-${i}`)).trim();
+      const fix = String(value(`ps-s-${i}`)).trim();
+      return [
+        pain || seen ? `• ${[pain, seen].filter(Boolean).join(" - ")}` : "",
+        fix ? `Proposed Solution: ${fix}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+    }),
+  ].filter(Boolean);
+
   const text = {
     facility: value("name") || "Unnamed facility",
     context: [
@@ -424,7 +442,7 @@ function showResults() {
     floors: value("fl") || "–",
     floorLine: value("fl") ? `Number of Floors: ${value("fl")}` : "",
     pains: pains.map((p) => `• ${p}`).join("\n") || "(none recorded)",
-    painLine: pains.join("; ") || "(none recorded)",
+    pains: painBlocks.join("\n\n") || "(none recorded)",
     carpetHours: roundUp(e.carpetHours).toFixed(2),
     hardHours: roundUp(e.hardHours).toFixed(2),
     fixtureHours: roundUp(e.fixtureHours).toFixed(2),
